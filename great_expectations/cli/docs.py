@@ -84,8 +84,12 @@ def docs_list(ctx):
     help="With this, all sites will get their data docs cleaned out. See data_docs section in great_expectations.yml",
 )
 @click.pass_context
-def clean_data_docs(ctx, site_name=None, all_sites=False):
-    """Delete data docs"""
+def docs_clean(ctx, site_name=None, all_sites=False):
+    """
+    Remove all files from a Data Docs site.
+
+    This is a useful first step if you wish to completely re-build a site from scratch.
+    """
     context = ctx.obj.data_context
 
     if (site_name is None and all_sites is False) or (site_name and all_sites):

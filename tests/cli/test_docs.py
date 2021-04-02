@@ -1,5 +1,6 @@
 import os
 
+import mock
 import pytest
 from click.testing import CliRunner
 
@@ -10,17 +11,14 @@ from tests.cli.utils import (
     assert_no_logging_messages_or_tracebacks,
 )
 
-try:
-    from unittest import mock
-except ImportError:
-    from unittest import mock
-
 
 def test_docs_help_output(caplog):
     runner = CliRunner(mix_stderr=False)
     result = runner.invoke(cli, ["--v3-api", "docs"], catch_exceptions=False)
     assert result.exit_code == 0
     assert "build  Build Data Docs for a project." in result.stdout
+    assert "list   List known Data Docs sites." in result.stdout
+    assert "clean  Remove all files from a Data Docs site." in result.stdout
     assert_no_logging_messages_or_tracebacks(caplog, result)
 
 
